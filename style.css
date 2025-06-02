@@ -641,6 +641,14 @@ a:hover .tooltip,
     cursor: pointer;
 }
 
+#thankyouMsg {
+    display: none;
+    font-weight: blod;
+    font-size: 20px;
+    margin-top: 15px;
+    color: green;
+}    
+
 /* BREAKPOINTS */
 @media screen and (max-width: 1200px) {
     html {
