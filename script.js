@@ -58,31 +58,3 @@ portfolioLists.forEach((list, idx) => {
 setTimeout(() => {
     sections[4].classList.remove('active');
 }, 1500);
-
-// Contact form submit and thank-you message
-const form = document.getElementById('contactForm');
-const thankyou = document.getElementById('thankyouMsg');
-
-if (form) {
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-
-    fetch(form.action, {
-      method: form.method,
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    })
-      .then(response => {
-        if (response.ok) {
-          form.reset();
-          thankyou.style.display = "block";
-        } else {
-          alert("Message bhejne me problem aayi.");
-        }
-      })
-      .catch(error => {
-        alert("Server error: " + error);
-      });
-  });
-}
