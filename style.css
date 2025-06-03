@@ -641,13 +641,26 @@ a:hover .tooltip,
     cursor: pointer;
 }
 
-#thankyouMsg {
-    display: none;
-    font-weight: blod;
-    font-size: 20px;
-    margin-top: 15px;
-    color: green;
-}    
+.thankyouMsg {
+  display: none;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 20px;
+  color: green;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* BREAKPOINTS */
 @media screen and (max-width: 1200px) {
