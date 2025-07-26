@@ -643,45 +643,59 @@ a:hover .tooltip,
 
 #music-player {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 20px; /* Neeche se 20px upar */
+  right: 20px;  /* Daayen se 20px andar */
   z-index: 9999;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 10px; 
+  display: flex;
+  align-items: center; /* Buttons ko vertically center rakhega */
+  gap: 10px;
+  cursor: grab; /* Indicate draggable */
 }
-
 
 #music-btn,
 #prev-btn,
 #next-btn {
-  background-color: rgba(0, 255, 255, 0.9); 
+  background-color: rgba(0, 255, 255, 0.9);
   color: #111;
   border: none;
-  border-radius: 50%; 
-  padding: 10px; 
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7); 
+  border-radius: 50%;
+  
+  display: grid;
+  place-items: center;
+  
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
   cursor: pointer;
   transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+#music-btn {
+  width: 65px;  
+  height: 65px; 
+}
+
+
+#prev-btn,
+#next-btn {
+  width: 50px;  
+  height: 50px;
+}
+
 
 #music-btn i {
-    font-size: 35px; 
+    font-size: 45px; 
 }
 
 #prev-btn i,
 #next-btn i {
-    font-size: 28px; 
+    font-size: 30px; 
 }
 
 #music-btn:hover,
 #prev-btn:hover,
 #next-btn:hover {
-  transform: scale(1.1); 
-  background-color: #00ffff; 
-  box-shadow: 0 0 25px #00ffff; 
+  transform: scale(1.1);
+  background-color: #00ffff;
+  box-shadow: 0 0 25px #00ffff;
 }
 
 @keyframes pulseGlow {
@@ -693,6 +707,29 @@ a:hover .tooltip,
 #music-btn.playing {
   animation: pulseGlow 1.5s ease-in-out infinite alternate; 
 }
+
+@keyframes professionalPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05); 
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff; 
+    opacity: 0.9; 
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    opacity: 1;
+  }
+}
+
+
+#music-btn.playing {
+  animation: professionalPulse 2s ease-in-out infinite alternate; 
+}  
 
 @media screen and (max-width: 1200px) {
     html {
@@ -816,82 +853,114 @@ a:hover .tooltip,
 }
 
 @media screen and (max-width: 600px) {
-  #music-player {
-    bottom: 80px;
-    right: 15px;
-  }
-
-  #music-btn {
-    font-size: 28px;
-    padding: 8px;
-    box-shadow: 0 0 10px #00ffff;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  #music-player {
-    bottom: 80px;
-    right: 15px;
-  }
-
-  #music-btn {
-    font-size: 28px;
-    padding: 8px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  #music-player {
-    bottom: 100px;
-    right: 10px;
-  }
-}
-
-@media screen and (max-width: 600px) {
+    
 
     #music-player {
         bottom: 80px;
-        right: 25px; 
-        gap: 5px; 
+        right: 25px;
+        gap: 5px;
+    }
+
+    #music-btn {
+        width: 50px; 
+        height: 50px;
+    }
+
+ 
+    #prev-btn,
+    #next-btn {
+        width: 40px; 
+        height: 40px;
     }
 
     #music-btn i {
-        font-size: 30px;
+        font-size: 32px; 
     }
     #prev-btn i,
     #next-btn i {
-        font-size: 24px;
+        font-size: 24px; 
     }
 }
 
 @media screen and (max-width: 400px) {
 
     #music-player {
-        bottom: 100px; 
-        right: 15px; 
-        gap: 3px; 
+        bottom: 100px;
+        right: 15px;
+        gap: 3px;
+    }
+
+    #music-btn {
+        width: 45px; 
+        height: 45px;
+    }
+
+    #prev-btn,
+    #next-btn {
+        width: 35px; 
+        height: 35px;
     }
 
     #music-btn i {
-        font-size: 28px;
+        font-size: 28px; 
     }
     #prev-btn i,
     #next-btn i {
-        font-size: 22px;
+        font-size: 20px; 
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 360px) {
     #music-player {
         bottom: 110px;
         right: 10px;
         gap: 2px;
     }
+
+    #music-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    #prev-btn,
+    #next-btn {
+        width: 30px; 
+        height: 30px;
+    }
+
     #music-btn i {
-        font-size: 25px;
+        font-size: 25px; 
     }
     #prev-btn i,
     #next-btn i {
-        font-size: 20px;
+        font-size: 18px; 
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #music-player {
+        bottom: 90px; 
+        right: 20px;  
+        gap: 4px;    
+    }
+
+    #music-btn {
+        width: 42px; 
+        height: 42px;
+    }
+
+    #prev-btn,
+    #next-btn {
+        width: 32px; 
+        height: 32px;
+    }
+
+    #music-btn i {
+        font-size: 26px; 
+    }    
+
+    #prev-btn i,
+    #next-btn i {
+        font-size: 19px; 
     }
 }
