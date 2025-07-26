@@ -678,7 +678,7 @@ a:hover .tooltip,
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
   cursor: pointer;
   transition: transform 0.2s, opacity 0.3s ease-in-out;
-}  
+}
 
 #prev-btn:hover,
 #next-btn:hover {
@@ -821,13 +821,6 @@ a:hover .tooltip,
   }
 }
 
-@media screen and (max-width: 400px) {
-  #music-player {
-    bottom: 100px;
-    right: 10px;
-  }
-}
-
 @media screen and (max-width: 768px) {
   #music-player {
     bottom: 80px;
@@ -845,4 +838,59 @@ a:hover .tooltip,
     bottom: 100px;
     right: 10px;
   }
+}
+
+@media screen and (max-width: 600px) {
+
+    #music-player {
+        bottom: 80px; 
+        right: 25px;
+        gap: 5px; 
+    }
+
+    #music-btn {
+        font-size: 30px; 
+        padding: 8px; 
+    }
+    #prev-btn,
+    #next-btn {
+        font-size: 24px; 
+        padding: 6px; 
+    }
+}
+
+@media screen and (max-width: 400px) {
+    
+    #music-player {
+        bottom: 100px; 
+        right: 15px; 
+        gap: 3px; 
+    }
+
+    #music-btn {
+        font-size: 28px; 
+        padding: 7px;
+    }
+    #prev-btn,
+    #next-btn {
+        font-size: 22px; 
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #music-player {
+        bottom: 110px;
+        right: 10px;
+        gap: 2px;
+    }
+    #music-btn {
+        font-size: 25px;
+        padding: 6px;
+    }
+    #prev-btn,
+    #next-btn {
+        font-size: 20px;
+        padding: 4px;
+    }
 }
