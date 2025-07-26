@@ -643,13 +643,13 @@ a:hover .tooltip,
 
 #music-player {
   position: fixed;
-  bottom: 20px; /* Neeche se 20px upar */
-  right: 20px;  /* Daayen se 20px andar */
+  bottom: 20px; 
+  right: 20px;  
   z-index: 9999;
   display: flex;
-  align-items: center; /* Buttons ko vertically center rakhega */
+  align-items: center; 
   gap: 10px;
-  cursor: grab; /* Indicate draggable */
+  cursor: grab; 
 }
 
 #music-btn,
