@@ -616,78 +616,78 @@
                 </audio>
             </div>
 
-        <script>
-        const audio = document.getElementById("bg-music");
-        const musicBtn = document.getElementById("music-btn");
-        const prevBtn = document.getElementById("prev-btn");
-        const nextBtn = document.getElementById("next-btn");
-        const icon = musicBtn.querySelector("i");
+            <script>
+            const audio = document.getElementById("bg-music");
+            const musicBtn = document.getElementById("music-btn");
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+            const icon = musicBtn.querySelector("i");
 
-        const songs = [
-            "audio/song1.mp3", 
-            "audio/song2.mp3", 
-            "audio/song3.m4a"  
-        ];
-        let currentSongIndex = 0;
-        let isPlaying = false;
+            const songs = [
+                "audio/song1.mp3", 
+                "audio/song2.mp3", 
+                "audio/song3.m4a"  
+            ];
+            let currentSongIndex = 0;
+            let isPlaying = false;
 
-        function loadSong(index) {
-            audio.src = songs[(index + songs.length) % songs.length]; 
-            audio.load();
-        }
+            function loadSong(index) {
+                audio.src = songs[(index + songs.length) % songs.length]; 
+                audio.load();
+            }
 
-        function playSong() {
-            audio.play().catch(error => {
-                console.log("Play was prevented:", error);
+            function playSong() {
+                audio.play().catch(error => {
+                    console.log("Play was prevented:", error);
+                    icon.className = "bx bx-play-circle";
+                    isPlaying = false;
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                });
+                icon.className = "bx bx-pause-circle";
+                isPlaying = true;
+                prevBtn.style.display = 'inline-block';
+                nextBtn.style.display = 'inline-block';
+            }
+
+            function pauseSong() {
+                audio.pause();
                 icon.className = "bx bx-play-circle";
                 isPlaying = false;
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
-            });
-            icon.className = "bx bx-pause-circle";
-            isPlaying = true;
-            prevBtn.style.display = 'inline-block';
-            nextBtn.style.display = 'inline-block';
-        }
+            }
 
-        function pauseSong() {
-            audio.pause();
-            icon.className = "bx bx-play-circle";
-            isPlaying = false;
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-        }
-
-        function toggleMusic() {
+            function toggleMusic() {
             if (isPlaying) {
                 pauseSong();
             } else {
                 playSong();
             }
-        }
-
-        function nextSong() {
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
-            loadSong(currentSongIndex);
-            if (isPlaying) {
-                playSong();
             }
-        }
 
-        function prevSong() {
-            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-            loadSong(currentSongIndex);
-            if (isPlaying) {
-                playSong();
+            function nextSong() {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                loadSong(currentSongIndex);
+                if (isPlaying) {
+                    playSong();
+                }
             }
-        }
 
-        audio.addEventListener("ended", nextSong);
+            function prevSong() {
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                loadSong(currentSongIndex);
+                if (isPlaying) {
+                    playSong();
+                }
+           }
 
-        loadSong(currentSongIndex);
-    </script>
+            audio.addEventListener("ended", nextSong);
+
+            loadSong(currentSongIndex);
+        </script>
     </div>
 </div>
+    
 </body>
-
 </html>
