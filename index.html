@@ -600,6 +600,94 @@
 
     <!-- JavaScript file script -->
     <script src="script.js"></script>
+
+    <div id="music-player">
+                <button id="prev-btn" onclick="prevSong()">
+                    <i class='bx bx-skip-previous'></i>
+                </button>
+                <button id="music-btn" onclick="toggleMusic()">                
+                    <i class='bx bx-play-circle'></i> <span class="tooltip">Play Song</span>
+                </button>
+                <button id="next-btn" onclick="nextSong()">
+                    <i class='bx bx-skip-next'></i>
+                </button>
+
+                <audio id="bg-music">
+                </audio>
+            </div>
+
+        <script>
+        const audio = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-btn");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const icon = musicBtn.querySelector("i");
+
+        const songs = [
+            "audio/song1.mp3", 
+            "audio/song2.mp3", 
+            "audio/song3.m4a"  
+        ];
+        let currentSongIndex = 0;
+        let isPlaying = false;
+
+        function loadSong(index) {
+            audio.src = songs[(index + songs.length) % songs.length]; 
+            audio.load();
+        }
+
+        function playSong() {
+            audio.play().catch(error => {
+                console.log("Play was prevented:", error);
+                icon.className = "bx bx-play-circle";
+                isPlaying = false;
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            });
+            icon.className = "bx bx-pause-circle";
+            isPlaying = true;
+            prevBtn.style.display = 'inline-block';
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function pauseSong() {
+            audio.pause();
+            icon.className = "bx bx-play-circle";
+            isPlaying = false;
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                pauseSong();
+            } else {
+                playSong();
+            }
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) {
+                playSong();
+            }
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) {
+                playSong();
+            }
+        }
+
+        audio.addEventListener("ended", nextSong);
+
+        loadSong(currentSongIndex);
+    </script>
+    </div>
+</div>
 </body>
 
 </html>
