@@ -614,23 +614,24 @@
                 </audio>
             </div>
 
-            <script>
+             <script>
             const audio = document.getElementById("bg-music");
             const musicBtn = document.getElementById("music-btn");
             const prevBtn = document.getElementById("prev-btn");
             const nextBtn = document.getElementById("next-btn");
             const icon = musicBtn.querySelector("i");
+            const musicPlayer = document.getElementById("music-player"); 
 
             const songs = [
-                "audio/song1.mp3", 
-                "audio/song2.mp3", 
-                "audio/song3.m4a"  
+                "audio/song1.mp3",
+                "audio/song2.mp3",
+                "audio/song3.m4a" 
             ];
             let currentSongIndex = 0;
             let isPlaying = false;
 
             function loadSong(index) {
-                audio.src = songs[(index + songs.length) % songs.length]; 
+                audio.src = songs[(index + songs.length) % songs.length];
                 audio.load();
             }
 
@@ -641,14 +642,14 @@
                     isPlaying = false;
                     prevBtn.style.display = 'none';
                     nextBtn.style.display = 'none';
+                    musicBtn.classList.remove('playing'); 
                 });
-                 icon.className = "bx bx-pause-circle";
-                    isPlaying = true;
-                    prevBtn.style.display = 'inline-block';
-                    nextBtn.style.display = 'inline-block';
-
-                    musicBtn.classList.add('playing');
-                }
+                icon.className = "bx bx-pause-circle";
+                isPlaying = true;
+                prevBtn.style.display = 'inline-block';
+                nextBtn.style.display = 'inline-block';
+                musicBtn.classList.add('playing'); 
+            }
 
             function pauseSong() {
                 audio.pause();
@@ -656,16 +657,15 @@
                 isPlaying = false;
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
-    
-                 musicBtn.classList.remove('playing');
-          }
+                musicBtn.classList.remove('playing'); 
+            }
 
             function toggleMusic() {
-            if (isPlaying) {
-                pauseSong();
-            } else {
-                playSong();
-            }
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
             }
 
             function nextSong() {
@@ -682,11 +682,71 @@
                 if (isPlaying) {
                     playSong();
                 }
-           }
+            }
 
             audio.addEventListener("ended", nextSong);
 
             loadSong(currentSongIndex);
+
+
+
+
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            musicPlayer.addEventListener('mousedown', startDrag);
+            musicPlayer.addEventListener('touchstart', startDrag);
+
+            function startDrag(e) {
+                isDragging = true;
+                e.preventDefault(); 
+
+                let clientX = e.clientX || e.touches[0].clientX;
+                let clientY = e.clientY || e.touches[0].clientY;
+
+                offsetX = clientX - musicPlayer.getBoundingClientRect().left;
+                offsetY = clientY - musicPlayer.getBoundingClientRect().top;
+
+                musicPlayer.style.cursor = 'grabbing';
+            }
+
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag);
+
+            function drag(e) {
+                if (!isDragging) return;
+
+                e.preventDefault(); 
+
+                let clientX = e.clientX || e.touches[0].clientX;
+                let clientY = e.clientY || e.touches[0].clientY;
+
+
+                let newX = clientX - offsetX;
+                let newY = clientY - offsetY;
+
+                musicPlayer.style.left = newX + 'px';
+                musicPlayer.style.top = newY + 'px';
+                musicPlayer.style.right = 'auto'; 
+                musicPlayer.style.bottom = 'auto'; 
+            }
+
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
+
+            function endDrag() {
+                isDragging = false;
+                musicPlayer.style.cursor = 'grab'; 
+            }
+
+            window.addEventListener('load', () => {
+                const rect = musicPlayer.getBoundingClientRect();
+                musicPlayer.style.left = rect.left + 'px';
+                musicPlayer.style.top = rect.top + 'px';
+                musicPlayer.style.right = 'auto'; 
+                musicPlayer.style.bottom = 'auto'; 
+            });
+
         </script>
     </div>
 </div> 
